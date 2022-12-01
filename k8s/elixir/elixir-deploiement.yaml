@@ -19,13 +19,15 @@ spec:
     spec:
       containers:
       - name: kubix
-        image: docker.io/adrianpaulcarrieres/kubix2:2.2
+        image: docker.io/adrianpaulcarrieres/kubix2:2.3
         imagePullPolicy: Always
         ports:
         - containerPort: 443
         envFrom:
           - secretRef:
               name: elixir-secret
+          - configMapRef:
+              name: elixir-configmap
           - configMapRef:
               name: postgres-configmap
           - secretRef:
