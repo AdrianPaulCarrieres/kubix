@@ -4,57 +4,33 @@ metadata:
   name: elixir
   namespace: default
   labels:
-    app: elixir
+    app: kubix
     tier: web
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: elixir
+      app: kubix
   template:
     metadata:
       labels:
-        app: elixir
+        app: kubix
         tier: web
     spec:
-      serviceAccountName: elixir-nodes
       containers:
-      - name: elixir
+      - name: kubix
         image: docker.io/adrianpaulcarrieres/kubix2:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 443
-        env:
-        - name: SECRET_KEY_BASE
-          valueFrom:
-            secretKeyRef:
+        envFrom:
+          - secretRef:
               name: elixir-secret
-              key: secret-key
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
+          - configMapRef:
+              name: postgres-configmap
+          - secretRef:
               name: postgres-secret
-              key: postgres-user
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-password
-        - name: POSTGRES_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: postgres-configmap
-              key: postgres-host
-        - name: PG_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: postgres-configmap
-              key: pg-port
-        - name: POSTGRES_DBNAME
-          valueFrom:
-            configMapKeyRef:
-              name: postgres-configmap
-              key: postgres-dbname
+        env:
         - name: NAMESPACE
           valueFrom:
             fieldRef:
@@ -65,17 +41,3 @@ spec:
               fieldPath: status.podIP
       imagePullSecrets:
         - name: regcred
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: elixir-service
-spec:
-  selector:
-    app: elixir
-  type: LoadBalancer
-  ports:
-    - protocol: TCP
-      port: 4000
-      targetPort: 4000
-      nodePort: 30000

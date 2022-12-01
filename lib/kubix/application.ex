@@ -7,6 +7,8 @@ defmodule Kubix.Application do
 
   @impl true
   def start(_type, _args) do
+    topologies = Application.get_env(:libcluster, :topologies) || []
+
     children = [
       # Start the Telemetry supervisor
       KubixWeb.Telemetry,
@@ -20,6 +22,7 @@ defmodule Kubix.Application do
       KubixWeb.Endpoint
       # Start a worker by calling: Kubix.Worker.start_link(arg)
       # {Kubix.Worker, arg}
+      {Cluster.Supervisor, [topologies, [name: Kubix.ClusterSupervisor]]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
     name: postgres-configmap
 data:
-    postgres-host: postgres-service
-    postgres-dbname: api
-    pg-port: "5432"
+    POSTGRES_HOST: postgres-service
+    POSTGRES_DBNAME: api
+    PG_PORT: "5432"
     POSTGRES_DB: api
