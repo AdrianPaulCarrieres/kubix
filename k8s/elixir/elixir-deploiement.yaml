@@ -7,7 +7,7 @@ metadata:
     app: kubix
     tier: web
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: kubix
@@ -19,13 +19,15 @@ spec:
     spec:
       containers:
       - name: kubix
-        image: docker.io/adrianpaulcarrieres/kubix2:1.1
+        image: docker.io/adrianpaulcarrieres/kubix2:2.7
         imagePullPolicy: Always
         ports:
         - containerPort: 443
         envFrom:
           - secretRef:
               name: elixir-secret
+          - configMapRef:
+              name: elixir-configmap
           - configMapRef:
               name: postgres-configmap
           - secretRef:
@@ -39,5 +41,3 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
-      imagePullSecrets:
-        - name: regcred

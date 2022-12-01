@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: elixir-configmap
+data:
+    PHX_HOST: localhost
+    PHX_SERVER: "true"
