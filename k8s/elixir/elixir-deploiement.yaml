@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: kubix
-        image: docker.io/adrianpaulcarrieres/kubix2:2.6
+        image: docker.io/adrianpaulcarrieres/kubix2:2.7
         imagePullPolicy: Always
         ports:
         - containerPort: 443
@@ -41,4 +41,3 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
-              
