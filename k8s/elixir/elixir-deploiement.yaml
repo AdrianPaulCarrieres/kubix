@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: kubix
-        image: docker.io/adrianpaulcarrieres/kubix2:2.3
+        image: docker.io/adrianpaulcarrieres/kubix2:2.5
         imagePullPolicy: Always
         ports:
         - containerPort: 443

@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
     name: elixir-configmap
 data:
-    PHX-HOST: 0.0.0.0
+    PHX-HOST: 51.159.207.190
+    PHX_SERVER: "true"
