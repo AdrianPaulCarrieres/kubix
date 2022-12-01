@@ -19,7 +19,7 @@ defmodule Kubix.Application do
       # Start Finch
       {Finch, name: Kubix.Finch},
       # Start the Endpoint (http/https)
-      KubixWeb.Endpoint
+      KubixWeb.Endpoint,
       # Start a worker by calling: Kubix.Worker.start_link(arg)
       # {Kubix.Worker, arg}
       {Cluster.Supervisor, [topologies, [name: Kubix.ClusterSupervisor]]}
