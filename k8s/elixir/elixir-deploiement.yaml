@@ -7,7 +7,7 @@ metadata:
     app: kubix
     tier: web
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: kubix
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: kubix
-        image: docker.io/adrianpaulcarrieres/kubix2:2.5
+        image: docker.io/adrianpaulcarrieres/kubix2:2.6
         imagePullPolicy: Always
         ports:
         - containerPort: 443
@@ -41,5 +41,4 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
-      imagePullSecrets:
-        - name: regcred
+              
